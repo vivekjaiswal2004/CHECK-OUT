@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Diwali with Fireworks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(circle at bottom, #1c1c44, #000);
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+        }
+
+        /* Firework Background Effect */
+        .firework-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 30%, rgba(255,255,255,0) 80%);
+            border-radius: 50%;
+            transform: scale(0);
+            opacity: 0;
+            animation: explode 1.5s ease-out infinite;
+        }
+
+        /* Firework Explosion Keyframes */
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            z-index: 1;
+            position: relative;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 30px rgba(255, 140, 0, 0.6);
+        }
+
+        /* Glowing Text */
+        .container h1 {
+            font-size: 3em;
+            background: linear-gradient(90deg, #ffd700, #ff4500);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: glow 1.5s ease-in-out infinite alternate;
+            text-shadow: 0 0 20px rgba(255, 223, 0, 0.7);
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 15px #ffd700, 0 0 25px #ff6347; }
+            100% { text-shadow: 0 0 25px #ffd700, 0 0 40px #ff4500; }
+        }
+
+        /* Greeting Message */
+        .container p {
+            font-size: 1.2em;
+            color: #ffd700;
+            margin: 20px 0 30px;
+            line-height: 1.5;
+        }
+
+        /* Floating Diya */
+        .diya {
+            width: 50px;
+            height: 70px;
+            background: linear-gradient(180deg, #ffb74d, #ff5733);
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            margin: 20px auto;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Flickering Flame */
+        .flame {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            width: 20px;
+            height: 30px;
+            background: radial-gradient(circle, #ffdd33, #ff4500);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.1s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; transform: translateY(0); }
+            50% { opacity: 0.8; transform: translateY(3px); }
+        }
+
+        /* Sparkling Diyas */
+        .diya-container {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Firework Background Container -->
+    <div class="firework-container">
+        <!-- Multiple Fireworks -->
+        <div class="firework" style="top: 80%; left: 20%; animation-delay: 0.1s;"></div>
+        <div class="firework" style="top: 85%; left: 40%; animation-delay: 0.4s;"></div>
+        <div class="firework" style="top: 75%; left: 60%; animation-delay: 0.7s;"></div>
+        <div class="firework" style="top: 85%; left: 80%; animation-delay: 1s;"></div>
+        <div class="firework" style="top: 70%; left: 50%; animation-delay: 1.3s;"></div>
+    </div>
+
+    <!-- Main Container with Text -->
+    <div class="container">
+        <h1>Happy Diwali</h1>
+        <p id="greeting"></p> <!-- Placeholder for the personalized greeting -->
+        
+        <!-- Floating Diyas -->
+        <div class="diya-container">
+            <div class="diya">
+                <div class="flame"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+            </div>
+            <div class="diya">
+                <div class="flame"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to get the name parameter from the URL
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Retrieve the name and display a personalized greeting
+        const name = getUrlParameter('name');
+        const greetingElement = document.getElementById('greeting');
+        if (name) {
+            greetingElement.innerText =  `Sending you my warmest wishes this Diwali, ${name}. May your home be filled with joy, your heart with love, and your life with prosperity. Enjoy this beautiful festival!`;
+        } else {
+            greetingElement.innerText = `Wishing you a prosperous and joyful Diwali!`;
+        }
+    </script>
+
+</body>
+</html>
